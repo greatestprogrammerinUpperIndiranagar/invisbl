@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Docs</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="app" aria-labelledby="app-title">
+      <header class="header">
+        <div class="mark" aria-hidden="true">D</div>
+        <div>
+          <h1 id="app-title">Docs</h1>
+          <p>Quick links</p>
+        </div>
+      </header>
+
+      <nav class="links" aria-label="Google document shortcuts">
+        <a class="link-card" href="https://docs.google.com/document/u/0/" target="_blank" rel="noreferrer">
+          <span class="link-icon docs-icon" aria-hidden="true">▤</span>
+          <span class="link-copy"><strong>Google Docs</strong><small>Open documents</small></span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="link-card" href="https://slides.google.com/presentation/u/0/" target="_blank" rel="noreferrer">
+          <span class="link-icon slides-icon" aria-hidden="true">▥</span>
+          <span class="link-copy"><strong>Google Slides</strong><small>Open presentations</small></span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </nav>
+
+      <div class="sr-only" aria-live="polite">
+        <span id="site-label">Current page</span>
+        <button id="copy-toggle" type="button" role="switch" aria-checked="false" aria-label="Toggle copy mode"></button>
+        <button id="active-toggle" type="button" role="switch" aria-checked="false" aria-label="Toggle always-active mode"></button>
+        <span id="shortcut-label">Ctrl Shift C</span>
+        <span id="active-shortcut-label">Ctrl Shift A</span>
+        <span id="status"></span>
+      </div>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

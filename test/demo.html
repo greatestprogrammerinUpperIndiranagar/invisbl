@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Invisbl manual test</title>
+    <style>
+      body { max-width: 720px; margin: 48px auto; padding: 0 24px; font: 16px/1.6 system-ui, sans-serif; }
+      .blocked { padding: 24px; border: 1px solid #bbb; user-select: none; }
+      .active-test { margin-top: 24px; padding: 24px; background: #e9f6f0; border-radius: 8px; }
+    </style>
+  </head>
+  <body oncopy="return false" oncontextmenu="return false" onselectstart="return false">
+    <h1>Invisbl manual test</h1>
+    <section class="blocked">
+      <h2>Copy-blocked text</h2>
+      <p>If Allow copy is off, this text cannot be selected or copied. Turn it on and try again.</p>
+    </section>
+    <section class="active-test">
+      <h2>Always-active state</h2>
+      <p id="activity-state">Switch tabs to see the page visibility state.</p>
+    </section>
+    <script>
+      const output = document.querySelector("#activity-state");
+      function renderState(eventName) {
+        output.textContent = `${eventName}: hidden=${document.hidden}, visibility=${document.visibilityState}, focus=${document.hasFocus()}`;
+      }
+      document.addEventListener("visibilitychange", () => renderState("visibilitychange"));
+      window.addEventListener("focus", () => renderState("focus"));
+      window.addEventListener("blur", () => renderState("blur"));
+      setInterval(() => renderState("timer"), 1000);
+      renderState("loaded");
+    </script>
+  </body>
+</html>
