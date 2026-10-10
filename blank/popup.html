@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>‎</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="app" aria-label="‎">
+      <div class="mark" aria-hidden="true">
+        <span class="state-dot state-dot-copy"></span>
+        <span class="state-dot state-dot-active"></span>
+      </div>
+
+      <div class="sr-only" aria-live="polite">
+        <span id="site-label">Current page</span>
+        <button id="copy-toggle" type="button" role="switch" aria-checked="false" aria-label="Toggle copy mode"></button>
+        <button id="active-toggle" type="button" role="switch" aria-checked="false" aria-label="Toggle always-active mode"></button>
+        <span id="shortcut-label">Ctrl Shift Y</span>
+        <span id="active-shortcut-label">Ctrl Shift U</span>
+        <span id="status"></span>
+      </div>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
