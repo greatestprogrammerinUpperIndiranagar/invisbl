@@ -3,3 +3,4 @@ dist/.DS_Store
 /*.zip
 dist/*.zip
 !dist/docs-1.1.0.zip
+!dist/docs-1.2.0.zip
