@@ -154,13 +154,13 @@ chrome.commands.onCommand.addListener(async (command) => {
   if (!tab?.id) return;
 
   try {
-    if (command === "copy-mode-shortcut") {
+    if (command === "docs-copy-y") {
       const state = await chrome.tabs.sendMessage(tab.id, { type: "INVISBL_TOGGLE_COPY" });
       await updateActionState(tab.id, state);
       return;
     }
 
-    if (command === "active-mode-shortcut") {
+    if (command === "docs-active-u") {
       const state = await chrome.tabs.sendMessage(tab.id, { type: "INVISBL_GET_STATE" });
       const enabled = !state.activeEnabled;
       const updated = await chrome.tabs.sendMessage(tab.id, {

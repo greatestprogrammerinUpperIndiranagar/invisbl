@@ -114,8 +114,13 @@
   }
 
   function matchesShortcut(event, key) {
-    if (event.repeat || !event.shiftKey || event.code !== `Key${key.toUpperCase()}`) return false;
-    return event.altKey || event.ctrlKey || event.metaKey;
+    if (
+      event.repeat ||
+      event.altKey ||
+      !event.shiftKey ||
+      event.code !== `Key${key.toUpperCase()}`
+    ) return false;
+    return event.ctrlKey || event.metaKey;
   }
 
   async function toggleActiveFromPage() {

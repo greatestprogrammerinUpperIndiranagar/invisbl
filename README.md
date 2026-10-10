@@ -20,6 +20,8 @@ The popup includes quick links to Google Docs and Google Slides. Use the keyboar
 - Toggle **Allow copy** with `Ctrl+Shift+Y` (`Command+Shift+Y` on macOS).
 - Toggle **Always active** with `Ctrl+Shift+U` (`Command+Shift+U` on macOS).
 
+Version 1.2.2 uses fresh command IDs (`docs-copy-y` and `docs-active-u`) so Chrome does not reuse the earlier C/A shortcut assignments. If an older Docs entry is still installed, remove it or load this version as a new unpacked extension, then verify the two assignments at `chrome://extensions/shortcuts`.
+
 If Chrome has a local shortcut collision, change the commands at `chrome://extensions/shortcuts`.
 
 After updating from an earlier build, reload the extension once so Chrome replaces the previous command registrations with the current ones.
