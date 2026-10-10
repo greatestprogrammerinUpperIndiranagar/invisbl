@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Docs",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "minimum_chrome_version": "111",
   "permissions": [
     "storage",
@@ -33,14 +33,14 @@
     "docs-copy-y": {
       "suggested_key": {
         "default": "Ctrl+Shift+Y",
-        "mac": "Command+Shift+Y"
+        "mac": "Ctrl+Shift+Y"
       },
       "description": "Toggle copying on the current website"
     },
     "docs-active-u": {
       "suggested_key": {
         "default": "Ctrl+Shift+U",
-        "mac": "Command+Shift+U"
+        "mac": "Ctrl+Shift+U"
       },
       "description": "Toggle always-active mode on the current website"
     }

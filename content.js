@@ -120,7 +120,7 @@
       !event.shiftKey ||
       event.code !== `Key${key.toUpperCase()}`
     ) return false;
-    return event.ctrlKey || event.metaKey;
+    return event.ctrlKey && !event.metaKey;
   }
 
   async function toggleActiveFromPage() {

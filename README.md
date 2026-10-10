@@ -17,10 +17,10 @@ A small, dependency-free Chrome extension with two keyboard-controlled tools:
 
 The popup includes quick links to Google Docs and Google Slides. Use the keyboard shortcuts on a regular website to control the two page tools. Each setting is remembered separately for each website. The extension also listens directly for these shortcuts on the active page, so they work even if Chrome did not assign the suggested command keys.
 
-- Toggle **Allow copy** with `Ctrl+Shift+Y` (`Command+Shift+Y` on macOS).
-- Toggle **Always active** with `Ctrl+Shift+U` (`Command+Shift+U` on macOS).
+- Toggle **Allow copy** with `Ctrl+Shift+Y` on Windows, Linux, and macOS.
+- Toggle **Always active** with `Ctrl+Shift+U` on Windows, Linux, and macOS.
 
-Version 1.2.2 uses fresh command IDs (`docs-copy-y` and `docs-active-u`) so Chrome does not reuse the earlier C/A shortcut assignments. If an older Docs entry is still installed, remove it or load this version as a new unpacked extension, then verify the two assignments at `chrome://extensions/shortcuts`.
+Version 1.2.3 keeps the same Control-based shortcuts on every platform and uses fresh command IDs (`docs-copy-y` and `docs-active-u`) so Chrome does not reuse the earlier C/A assignments. If an older Docs entry is still installed, remove it or load this version as a new unpacked extension, then verify the two assignments at `chrome://extensions/shortcuts`.
 
 If Chrome has a local shortcut collision, change the commands at `chrome://extensions/shortcuts`.
 
