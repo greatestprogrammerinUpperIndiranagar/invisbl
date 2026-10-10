@@ -139,14 +139,14 @@
   function handlePageShortcut(event) {
     if (window.top !== window || isEditable(event.target)) return;
 
-    if (matchesShortcut(event, "c")) {
+    if (matchesShortcut(event, "y")) {
       event.preventDefault();
       event.stopImmediatePropagation();
       void setCopyState(!copyEnabled);
       return;
     }
 
-    if (matchesShortcut(event, "a")) {
+    if (matchesShortcut(event, "u")) {
       event.preventDefault();
       event.stopImmediatePropagation();
       void toggleActiveFromPage();

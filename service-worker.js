@@ -1,8 +1,44 @@
 const ACTIVE_STORAGE_PREFIX = "active-enabled:";
 
-async function updateBadge(tabId) {
+const ICON_PATHS = {
+  base: {
+    16: "icons/icon-16.png",
+    32: "icons/icon-32.png",
+    48: "icons/icon-48.png",
+    128: "icons/icon-128.png",
+  },
+  copy: {
+    16: "icons/icon-copy-16.png",
+    32: "icons/icon-copy-32.png",
+    48: "icons/icon-copy-48.png",
+    128: "icons/icon-copy-128.png",
+  },
+  active: {
+    16: "icons/icon-active-16.png",
+    32: "icons/icon-active-32.png",
+    48: "icons/icon-active-48.png",
+    128: "icons/icon-active-128.png",
+  },
+  both: {
+    16: "icons/icon-both-16.png",
+    32: "icons/icon-both-32.png",
+    48: "icons/icon-both-48.png",
+    128: "icons/icon-both-128.png",
+  },
+};
+
+function iconForState(copyEnabled, activeEnabled) {
+  if (copyEnabled && activeEnabled) return ICON_PATHS.both;
+  if (copyEnabled) return ICON_PATHS.copy;
+  if (activeEnabled) return ICON_PATHS.active;
+  return ICON_PATHS.base;
+}
+
+async function updateActionState(tabId, state = {}) {
   if (!Number.isInteger(tabId)) return;
+  const icon = iconForState(Boolean(state.copyEnabled), Boolean(state.activeEnabled));
   await Promise.all([
+    chrome.action.setIcon({ tabId, path: icon }),
     chrome.action.setBadgeText({ tabId, text: "" }),
     chrome.action.setBadgeBackgroundColor({ tabId, color: "#17765a" }),
   ]);
@@ -68,7 +104,7 @@ chrome.runtime.onStartup.addListener(() => void reconcileRegistrations());
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message?.type === "INVISBL_STATE" && sender.frameId === 0) {
-    void updateBadge(sender.tab?.id);
+    void updateActionState(sender.tab?.id, message);
     return;
   }
 
@@ -87,7 +123,7 @@ chrome.commands.onCommand.addListener(async (command) => {
   try {
     if (command === "toggle-copy") {
       const state = await chrome.tabs.sendMessage(tab.id, { type: "INVISBL_TOGGLE_COPY" });
-      await updateBadge(tab.id);
+      await updateActionState(tab.id, state);
       return;
     }
 
@@ -99,10 +135,10 @@ chrome.commands.onCommand.addListener(async (command) => {
         enabled,
       });
       await configureAlwaysActive(new URL(tab.url).origin, enabled);
-      await updateBadge(tab.id);
+      await updateActionState(tab.id, { ...state, activeEnabled: updated.enabled });
       await chrome.tabs.reload(tab.id);
     }
   } catch {
-    await updateBadge(tab.id);
+    await updateActionState(tab.id);
   }
 });

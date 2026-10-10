@@ -33,8 +33,8 @@ async function sendToPage(message) {
 
 async function initialize() {
   if (navigator.userAgent.includes("Mac")) {
-    copyShortcutLabel.textContent = "⌃ ⇧ C";
-    activeShortcutLabel.textContent = "⌃ ⇧ A";
+    copyShortcutLabel.textContent = "⌘ ⇧ Y";
+    activeShortcutLabel.textContent = "⌘ ⇧ U";
   }
 
   [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });

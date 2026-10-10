@@ -32,15 +32,15 @@
   "commands": {
     "toggle-copy": {
       "suggested_key": {
-        "default": "Ctrl+Shift+C",
-        "mac": "MacCtrl+Shift+C"
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
       },
       "description": "Toggle copying on the current website"
     },
     "toggle-active": {
       "suggested_key": {
-        "default": "Ctrl+Shift+A",
-        "mac": "MacCtrl+Shift+A"
+        "default": "Ctrl+Shift+U",
+        "mac": "Command+Shift+U"
       },
       "description": "Toggle always-active mode on the current website"
     }

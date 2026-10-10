@@ -17,10 +17,10 @@ A small, dependency-free Chrome extension with two keyboard-controlled tools:
 
 The popup includes quick links to Google Docs and Google Slides. Use the keyboard shortcuts on a regular website to control the two page tools. Each setting is remembered separately for each website. The extension also listens directly for these shortcuts on the active page, so they work even if Chrome did not assign the suggested command keys.
 
-- Toggle **Allow copy** with `Ctrl+Shift+C` (`Control+Shift+C` on macOS).
-- Toggle **Always active** with `Ctrl+Shift+A` (`Control+Shift+A` on macOS).
+- Toggle **Allow copy** with `Ctrl+Shift+Y` (`Command+Shift+Y` on macOS).
+- Toggle **Always active** with `Ctrl+Shift+U` (`Command+Shift+U` on macOS).
 
-Chrome may reserve `Ctrl+Shift+C` for its DevTools element picker. If Chrome claims that key, change the shortcut at `chrome://extensions/shortcuts`; the page-level fallback also accepts `Alt+Shift+C`.
+If Chrome has a local shortcut collision, change the commands at `chrome://extensions/shortcuts`.
 
 There is no visible toolbar badge or page overlay.
 
