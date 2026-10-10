@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Docs",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "minimum_chrome_version": "111",
   "permissions": [
     "storage",
@@ -30,14 +30,14 @@
     }
   ],
   "commands": {
-    "toggle-copy": {
+    "copy-mode-shortcut": {
       "suggested_key": {
         "default": "Ctrl+Shift+Y",
         "mac": "Command+Shift+Y"
       },
       "description": "Toggle copying on the current website"
     },
-    "toggle-active": {
+    "active-mode-shortcut": {
       "suggested_key": {
         "default": "Ctrl+Shift+U",
         "mac": "Command+Shift+U"

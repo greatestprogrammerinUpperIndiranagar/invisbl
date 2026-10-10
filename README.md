@@ -22,6 +22,8 @@ The popup includes quick links to Google Docs and Google Slides. Use the keyboar
 
 If Chrome has a local shortcut collision, change the commands at `chrome://extensions/shortcuts`.
 
+After updating from an earlier build, reload the extension once so Chrome replaces the previous command registrations with the current ones.
+
 There is no visible toolbar badge or page overlay.
 
 ### Test locally
