@@ -45,6 +45,7 @@ It also suppresses visibility-change, blur, and mouse-leave signals that website
 - Chrome blocks extensions on internal pages such as `chrome://settings` and the Chrome Web Store.
 - Chrome can still throttle timers, networking, or rendering in background tabs at the browser or operating-system level. An extension cannot override every form of resource throttling.
 - Some sites use additional activity signals that may require site-specific handling.
+- CodePen uses separate `codepen.io` and `cdpn.io` frame origins; enabling Always active on either one also covers the other so the preview frame receives the same page-level overrides.
 - The extension does not bypass paywalls, authentication, encryption, or access controls; it only changes browser-side behavior for content already available to the user.
 
 ## Privacy

@@ -62,14 +62,34 @@ function registrationId(origin) {
   return `always-active-${(hash >>> 0).toString(36)}`;
 }
 
-function matchPattern(origin) {
-  if (origin === "null") return "file:///*";
+function matchPatterns(origin) {
+  if (origin === "null") return ["file:///*"];
   const url = new URL(origin);
-  if (url.protocol === "file:") return "file:///*";
+  if (url.protocol === "file:") return ["file:///*"];
   if (url.protocol !== "http:" && url.protocol !== "https:") {
     throw new Error("Always-active mode is only available on regular websites.");
   }
-  return `${url.protocol}//${url.hostname}/*`;
+
+  const host = url.hostname;
+  const patterns = new Set([`${url.protocol}//${host}/*`]);
+
+  // A page can run its activity check inside a same-site subdomain or an
+  // embedded preview origin. CodePen, for example, uses codepen.io for the
+  // editor and cdpn.io for the live preview. Cover those related frames when
+  // Always active is enabled from either side.
+  if (host === "codepen.io" || host.endsWith(".codepen.io")) {
+    patterns.add(`${url.protocol}//codepen.io/*`);
+    patterns.add(`${url.protocol}//*.codepen.io/*`);
+    patterns.add(`${url.protocol}//cdpn.io/*`);
+    patterns.add(`${url.protocol}//*.cdpn.io/*`);
+  } else if (host === "cdpn.io" || host.endsWith(".cdpn.io")) {
+    patterns.add(`${url.protocol}//cdpn.io/*`);
+    patterns.add(`${url.protocol}//*.cdpn.io/*`);
+    patterns.add(`${url.protocol}//codepen.io/*`);
+    patterns.add(`${url.protocol}//*.codepen.io/*`);
+  }
+
+  return [...patterns];
 }
 
 async function configureAlwaysActive(origin, enabled) {
@@ -83,7 +103,7 @@ async function configureAlwaysActive(origin, enabled) {
     return;
   }
 
-  const matches = [matchPattern(origin)];
+  const matches = matchPatterns(origin);
   if (existing.length && existing[0].matches?.join() === matches.join()) return;
   if (existing.length) {
     await chrome.scripting.unregisterContentScripts({ ids: [id] });
