@@ -4,6 +4,7 @@ const siteLabel = document.querySelector("#site-label");
 const status = document.querySelector("#status");
 const copyShortcutLabel = document.querySelector("#shortcut-label");
 const activeShortcutLabel = document.querySelector("#active-shortcut-label");
+const mark = document.querySelector(".mark");
 
 let activeTab = null;
 let currentCopyState = false;
@@ -16,6 +17,11 @@ function showStatus(message) {
 
 function setToggle(toggle, enabled) {
   toggle.setAttribute("aria-checked", String(Boolean(enabled)));
+}
+
+function setIndicatorState(copyEnabled, activeEnabled) {
+  mark.classList.toggle("copy-on", Boolean(copyEnabled));
+  mark.classList.toggle("active-on", Boolean(activeEnabled));
 }
 
 function displayHost(url) {
@@ -46,6 +52,7 @@ async function initialize() {
     currentActiveState = pageState.activeEnabled;
     setToggle(copyToggle, currentCopyState);
     setToggle(activeToggle, currentActiveState);
+    setIndicatorState(currentCopyState, currentActiveState);
   } catch {
     copyToggle.disabled = true;
     activeToggle.disabled = true;
@@ -63,6 +70,7 @@ copyToggle.addEventListener("click", async () => {
     });
     currentCopyState = response.enabled;
     setToggle(copyToggle, currentCopyState);
+    setIndicatorState(currentCopyState, currentActiveState);
   } catch {
     showStatus("Copy mode could not be changed on this page.");
   } finally {
@@ -82,6 +90,7 @@ activeToggle.addEventListener("click", async () => {
     });
     currentActiveState = response.enabled;
     setToggle(activeToggle, currentActiveState);
+    setIndicatorState(currentCopyState, currentActiveState);
 
     const configured = await chrome.runtime.sendMessage({
       type: "INVISBL_CONFIGURE_ACTIVE",
@@ -97,6 +106,7 @@ activeToggle.addEventListener("click", async () => {
   } catch {
     currentActiveState = previousState;
     setToggle(activeToggle, currentActiveState);
+    setIndicatorState(currentCopyState, currentActiveState);
     await sendToPage({ type: "INVISBL_SET_ACTIVE", enabled: previousState }).catch(() => {});
     if (registrationChanged) {
       await chrome.runtime.sendMessage({
