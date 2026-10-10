@@ -44,6 +44,15 @@ async function updateActionState(tabId, state = {}) {
   ]);
 }
 
+async function syncTabIcon(tabId) {
+  try {
+    const state = await chrome.tabs.sendMessage(tabId, { type: "INVISBL_GET_STATE" });
+    await updateActionState(tabId, state);
+  } catch {
+    await updateActionState(tabId);
+  }
+}
+
 function registrationId(origin) {
   let hash = 2166136261;
   for (const character of origin) {
@@ -101,6 +110,10 @@ async function reconcileRegistrations() {
 
 chrome.runtime.onInstalled.addListener(() => void reconcileRegistrations());
 chrome.runtime.onStartup.addListener(() => void reconcileRegistrations());
+chrome.tabs.onActivated.addListener(({ tabId }) => void syncTabIcon(tabId));
+chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
+  if (changeInfo.status === "complete") void syncTabIcon(tabId);
+});
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message?.type === "INVISBL_STATE" && sender.frameId === 0) {
